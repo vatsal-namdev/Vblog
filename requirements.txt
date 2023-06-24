@@ -1,6 +1,5 @@
 asgiref==3.6.0
 beautifulsoup4==4.12.2
-certifi @ file:///C:/b/abs_85o_6fm0se/croot/certifi_1671487778835/work/certifi
 Django==4.1.7
 django-admin-honeypot==1.1.0
 django-admin-honeypot-updated-2021==1.2.0
