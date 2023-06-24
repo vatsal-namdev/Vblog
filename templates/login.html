@@ -1,0 +1,73 @@
+
+
+<style>
+    body{
+        background-color: aqua;
+    }
+    h5{
+        color: red;
+    }
+    .lbox{
+        border: 1px transparent black;
+        border-radius: 4px;
+        background-color: white;
+        width: 270px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 180px;
+        padding: 20px 90px;
+            }
+        label {
+                    display: block;
+                    margin: 0.5rem 0;
+                }
+                
+        input
+         {
+            margin: 10px 0 0 0;
+            width: 100%;
+            min-height: 2em;
+        }
+        input[type=submit]{
+            background-color: blue;
+            border: none;
+            border-radius: 6px;
+            height: 28px;
+            color: white;
+        }
+        .intro{
+            color: red;
+            font-family: fantasy;
+            border: 2px solid white;
+            border-radius: 16px;
+            max-width: 56px;
+            padding: 5px;
+        }
+</style>
+
+{% for message in messages %}
+<h5>{{message}}</h5>
+{% endfor %}
+
+<!-- {% for user in username %}
+<h5><a href="{% url 'user' user %}"></a></h5>
+{% endfor %} -->
+
+<div class="intro">
+    V-Blog
+</div>
+
+<div class="lbox">
+    <h1>Login Now</h1>
+    <form method="POST" action="login">
+        {% csrf_token %}
+        
+            <label for="username">Username</label>
+            <input type="text" name="username" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" required><br>
+            <input type="submit" name="" id="">
+        </form>
+        <p>Don't have an account? <a href="register">Sign Up</a></p>
+</div>

@@ -1,0 +1,9 @@
+<h1>Delete</h1>
+
+<h3>Delete-{{post.title}}</h3>
+
+<form method="POST">
+    {% csrf_token %}
+   <input type="checkbox" name="check" id="" required> Confirm<br>
+    <button>Delete</button>
+</form>

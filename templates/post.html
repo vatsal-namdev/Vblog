@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body{
+            background: #f1f1f1;
+        }
+        .heading{
+            text-align: center;
+
+        }
+        .box{
+            border: 1px solid black;
+            border-radius: 3px;
+            /* height: 150px; */
+            width: 100%;
+            padding-left: 5px;
+            padding-top: 3px;
+            padding-right: 5px;
+            padding-bottom: 2px;
+            background: white;
+            margin: 10px 0px 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading"><h1>Blog Here</h1></div>
+
+    
+    <div class="box">
+        <h2>{{post.title}}</h2>
+        <h5>{{post.created}}</h5>
+        <p>{{post.body}}</p>
+        <h6>{{post.author}}</h6>
+        {% if user.is_authenticated %}
+        <a href="update/{{post.id}}">Edit</a>
+        <a href="{% url 'delete_post' post.pk %}">Delete</a>
+        {% endif %}
+
+        <br>
+        <br>
+        <form action="{% url 'like' post.pk %}" method="POST">
+            {% csrf_token %}
+           {% if user.is_authenticated %}
+           {% if liked %}
+           <button type="submit", name="post_id", value="{{post.id}}", class="btn btn-primary btn-sm">UnLike</button>
+           {% else %}
+           <button type="submit", name="post_id", value="{{post.id}}", class="btn btn-danger btn-sm">Like</button>
+           
+           {% endif %}
+
+           {% else %}
+           <small>Login to Like</small>
+           {% endif %}
+           -{{likes_count}} Likes
+        </form>
+    </div>
+   
+</body>
+</html>

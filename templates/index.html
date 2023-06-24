@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body{
+            background: white;
+        }
+        .heading{
+            text-align: center;
+            padding-bottom: 5px;
+            background-color: #8e43e7;
+            border-radius: 6px;
+            
+        }
+        @keyframes ex {
+            0% {color : black}
+            100% {color: white;}
+        }
+        .heading h1{
+            color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            animation-name: ex;
+            animation-duration: 4s;
+        }
+       
+        .box{
+            border: 1px solid rgb(81, 171, 129);
+            border-radius: 8px;
+            /* height: 150px; */
+            width: 100%;
+            padding-left: 5px;
+            padding-top: 3px;
+            padding-right: 0;
+            padding-bottom: 2px;
+            background: rgb(252, 252, 252);
+            margin: 10px 0 10px 0;
+            transition: all;
+        }
+        .box:hover{
+            transform: scale(1.004);
+        }
+        ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #aeed76;
+            border-radius: 5px;
+        }
+        li {
+            float: right;
+            }
+            ul .navbar-brand{
+                float: left;
+                color: black;
+                padding: 1px 3px;
+                margin: 8px 6px;
+                font-style: italic;
+                font-family: cursive;
+                border: 2px dashed white;
+                border-radius: 16px;
+            }
+            li a {
+                    display: block;
+                    color: rgb(79, 106, 169);
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
+                li input{
+                        float: center;
+                        padding: 6px;
+                        border: none;
+                        margin-top: 8px;
+                        margin-right: 1px;
+                        font-size: 17px;
+                        border-radius: 16px;
+                        }
+                        .topnav .search-container button {
+                        float: right;
+                        padding: 6px 8px;
+                        margin-top: 8px;
+                        margin-right: 16px;
+                        background: transparent;
+                        font-size: 17px;
+                        border: none;
+                        cursor: pointer;
+                        }
+
+                        .topnav .search-container button:hover {
+                        background: #ccc;
+                        }
+                       
+
+        li a:hover {
+                    background-color: #111;
+                    color: white;
+                    }
+            .active {
+                    color: white;
+                    }
+            button{
+                background-color: transparent;
+                border: none;
+                padding: 15px 32px;
+                text-align: center;
+                font-size: 16px;
+                color: white;
+            }
+            button:hover{
+                background-color: white;
+                color: black;
+                border-radius: 6px;
+            }
+            footer{
+                background-color: #3b3a3a;
+                color: white;
+                text-align: center;
+                padding: 100px 0px 80px 0px;
+                border-radius: 5px;
+                
+            }
+    </style>
+</head>
+
+<body>
+    <nav class="topnav">
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="update_profile/{{user.username}}/{{user.pk}}">Edit Profile</a></li>
+            {% endif %}
+            <li><a href="#about">About us</a></li>
+            <li class="search-container"><form method="GET" action="search">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form></li>
+              
+              <li class="navbar-brand">V-Blog</li> 
+          </ul>
+    </nav>
+    <div class="heading">
+        <h1>..Blog Here
+            <span style="color:aquamarine">
+            {% if user.is_authenticated %}
+            ,{{username}}
+            {% endif %}
+            </span>..</h1>
+        <hr>
+        {% if user.is_authenticated %}
+        <a href="logout"><button>Logout</button></a>
+        <a href="ad"><button>Add Blog</button></a>
+        {% else %}
+        <a href="register"><button>Register</button></a>
+        <a href="login"><button>Login</button></a>
+        {% endif %}
+
+        
+    </div>
+
+    {% for p in post %}
+    <div class="box">
+       <a style="text-decoration: none; color: black;" href="/post/{{p.id}}">
+        <h2>{{p.title}}</h2>
+        <h5>{{p.created}}</h5>
+        <p>{{p.body|truncatewords:20}}</p>
+       </a>
+
+    </div>
+    {% endfor %}
+    <footer id="foot">
+        <p id="about">Here we help you with best essentials for you.</p>
+        Thanks for reading...
+    </footer>
+</body>
+</html>
