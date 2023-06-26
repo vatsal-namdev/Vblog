@@ -61,24 +61,20 @@ def login(request):
     else:          
         return render(request, 'login.html')
 def ad(request):
-    return render(request, 'ad.html')
+    username = request.user.username
+    return render(request, 'ad.html',{'username':username})
 
 def save(request):
     if request.method=='POST':
         title = request.POST.get('title')
         body = request.POST.get('body')
-        author = 0
+        author = request.POST.get('author')
         created = request.POST.get('created')
 
-        # username = request.user.username
-        # if author==username:
-        sv = posts(author,title=title,body=body,created=created)
+    
+        sv = posts(author=author,title=title,body=body,created=created)
         sv.save()
         return HttpResponse("Submitted")
-
-        # else:
-        #     messages.info(request, 'Author is not valid')
-        #     return redirect('ad')
 
 def search(request):
     query = request.GET['search']
@@ -124,10 +120,15 @@ def logout(request):
 
 def post(request, pk):
     post = posts.objects.get(id=pk)
+    username = request.user.username
+    if username == post.author:
+        signal = True
+    else:
+        signal = False
     stuff = get_object_or_404(posts, id= pk)
     likes_count = stuff.total_likes()
 
     liked = False
     if stuff.likes.filter(id=request.user.id).exists():
         liked = True
-    return render(request, 'post.html',{'post':post,'likes_count':likes_count,'liked':liked})
+    return render(request, 'post.html',{'post':post,'likes_count':likes_count,'liked':liked,'signal':signal})

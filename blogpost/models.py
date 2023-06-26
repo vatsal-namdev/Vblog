@@ -8,7 +8,7 @@ from ckeditor.fields import RichTextField
 class posts(models.Model):
     title = models.CharField(max_length=100)
     body = RichTextField(blank=True,null=True,max_length=100000)
-    author = models.ForeignKey(User,default=1, on_delete=models.CASCADE)
+    author = models.CharField(max_length=1000,blank=True)
     created = models.DateTimeField(default=datetime.now, blank=True)
     likes = models.ManyToManyField(User, related_name='blog_posts')
 

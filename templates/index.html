@@ -174,12 +174,12 @@
         
     </div>
 
-    {% for p in post %}
+    {% for p in post reversed%}
     <div class="box">
        <a style="text-decoration: none; color: black;" href="/post/{{p.id}}">
         <h2>{{p.title}}</h2>
         <h5>{{p.created}}</h5>
-        <p>{{p.body|truncatewords:20}}</p>
+        <p>{{p.body|truncatewords:20|safe}}</p>
        </a>
 
     </div>

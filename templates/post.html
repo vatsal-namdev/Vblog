@@ -36,9 +36,9 @@
     <div class="box">
         <h2>{{post.title}}</h2>
         <h5>{{post.created}}</h5>
-        <p>{{post.body}}</p>
-        <h6>{{post.author}}</h6>
-        {% if user.is_authenticated %}
+        <p>{{post.body|safe}}</p>
+        <h6>-{{post.author}}</h6>
+        {% if signal %}
         <a href="update/{{post.id}}">Edit</a>
         <a href="{% url 'delete_post' post.pk %}">Delete</a>
         {% endif %}
