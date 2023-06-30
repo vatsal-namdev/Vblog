@@ -14,6 +14,9 @@
         body{
             background: white;
         }
+        nav{
+            height: 60px;
+        }
         .heading{
             text-align: center;
             padding-bottom: 5px;
@@ -36,13 +39,14 @@
             border: 1px solid rgb(81, 171, 129);
             border-radius: 8px;
             /* height: 150px; */
-            width: 100%;
+            width: 98%;
             padding-left: 5px;
             padding-top: 3px;
             padding-right: 0;
             padding-bottom: 2px;
             background: rgb(252, 252, 252);
-            margin: 10px 0 10px 0;
+            margin: 10px 0 10px 10px;
+            align-self: center;
             transition: all;
         }
         .box:hover{
@@ -69,7 +73,6 @@
                         padding: 6px;
                         border: none;
                         margin-top: 8px;
-                        margin-right: 1px;
                         font-size: 17px;
                         border-radius: 16px;
                         }
@@ -78,11 +81,12 @@
                         border: none;
                         border-radius: 8px;
                         cursor: pointer;
+                        width: 40%;
                         }
 
                         .search-container button:hover {
                         background: #ccc;
-                        border-radius: 6px;
+                        border-radius: 3px;
                         }
 
                         .search-container button{
@@ -127,9 +131,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md bg">
-        <a href="" class="navbar-brand fs-3 ms-3">V-Blog</a>
-        <div class="search-container fs-6"><form method="GET" action="search">
+    <nav class="navbar navbar-expand-md bg mb-2">
+        <a href="" class="navbar-brand fs-sm-3 ms-3">V-Blog</a>
+        <div class="search-container fs-m-6"><form method="GET" action="search">
             <input type="text" placeholder="Search.." name="search">
             <button type="submit"><i class="bi bi-search"></i></button>
           </form></div>
@@ -177,7 +181,7 @@
     {% for p in post reversed%}
     <div class="box">
        <a style="text-decoration: none; color: black;" href="/post/{{p.id}}">
-        <h2>{{p.title}}</h2>
+        <h2>{{p.title|truncatewords:10}}</h2>
         <h5>{{p.created}}</h5>
         <p>{{p.body|truncatewords:20|safe}}</p>
        </a>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Blog Neptune</title>
+    <title>Add Blog Vblog</title>
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -23,6 +23,7 @@
             box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
             margin: 16px;
             border-radius: 14px;
+            width: 98%;
         }
         .addf label{
             display: block;
@@ -30,13 +31,14 @@
         }
         input{
             margin: 10px 0 0 0;
-            width: 100%;
+            /* width: 100%; */
             min-height: 2em;
             border-radius: 5px;
             border: none;
         }
         textarea{
             border-radius: 5px;
+            /* width: 95%; */
         }
         input[type="submit"] {
     display: block;
@@ -57,9 +59,9 @@
 <body>
     <div>
 
-    </div class="addp">
+    </div class="addp" style="text-align: center; width: 98%">
     <h3 style="text-align: center; margin: 25px;">Add your blog here..</h3>
-    <div class="addf">
+    <div class="addf" style="text-align: center;">
         <form method="POST" action="save">
             {% csrf_token %}
             {{form.media}}

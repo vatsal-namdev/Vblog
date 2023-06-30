@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Vblog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <style>
         body{
             background: white;
+        }
+        nav{
+            height: 60px;
         }
         .heading{
             text-align: center;
@@ -44,27 +51,16 @@
         .box:hover{
             transform: scale(1.004);
         }
-        ul{
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #aeed76;
-            border-radius: 5px;
-        }
-        li {
-            float: right;
-            }
-            ul .navbar-brand{
+        .navbar-brand{
                 float: left;
                 color: black;
-                padding: 1px 3px;
-                margin: 8px 6px;
                 font-style: italic;
                 font-family: cursive;
                 border: 2px dashed white;
                 border-radius: 16px;
             }
+       
+            
             li a {
                     display: block;
                     color: rgb(79, 106, 169);
@@ -72,28 +68,17 @@
                     padding: 14px 16px;
                     text-decoration: none;
                 }
-                li input{
-                        float: center;
-                        padding: 6px;
+                
+                        .search-container input{
+                        
                         border: none;
-                        margin-top: 8px;
-                        margin-right: 1px;
-                        font-size: 17px;
-                        border-radius: 16px;
-                        }
-                        .topnav .search-container button {
-                        float: right;
-                        padding: 6px 8px;
-                        margin-top: 8px;
-                        margin-right: 16px;
-                        background: transparent;
-                        font-size: 17px;
-                        border: none;
+                        border-radius: 8px;
                         cursor: pointer;
                         }
 
-                        .topnav .search-container button:hover {
+                        .search-container button:hover {
                         background: #ccc;
+                        border-radius: 6px;
                         }
                        
 
@@ -125,22 +110,40 @@
                 border-radius: 5px;
                 
             }
+            .bg{
+                background-color: #8fc9f1;
+            }
     </style>
 </head>
 
 <body>
-    <nav class="topnav">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">About</a></li>
-            <li class="search-container"><form method="GET" action="search">
-                <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
-              </form></li>
-              <li class="navbar-brand">V-Blog</li> 
-          </ul>
-    </nav>
+    <nav class="navbar navbar-expand-md bg mb-2">
+        <a href="" class="navbar-brand fs-3 ms-3">V-Blog</a>
+        <div class="search-container fs-6"><form method="GET" action="search">
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="bi bi-search"></i></button>
+          </form></div>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#btn">
+        <i class="bi bi-list"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="btn">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link mx-3 text-white active fs-5">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a href="update_profile/{{user.username}}/{{user.pk}}" class="nav-link mx-3 text-white fs-5">Edit Profile</a></li>
+            {% endif %}
+            <li class="nav-item">
+                <a href="#about" class="nav-link mx-3 text-white fs-5">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link mx-3 text-white fs-5">Contact Us</a>
+            </li>
+        </ul>
+    </div>
+</nav>
     <div class="heading">
         <h1>..Blog Here..</h1>
         <hr>
@@ -161,9 +164,9 @@
     {% for p in post reversed %}
     <div class="box">
        <a style="text-decoration: none; color: black;" href="/post/{{p.id}}">
-        <h2>{{p.title}}</h2>
+        <h2>{{p.title|truncatewords:10}}</h2>
         <h5>{{p.created}}</h5>
-        <p>{{p.body|truncatewords:20}}</p>
+        <p>{{p.body|truncatewords:20|safe}}</p>
        </a>
 
     </div>
