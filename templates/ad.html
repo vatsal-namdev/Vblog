@@ -13,17 +13,19 @@
         form {
     width: 60vw;
     max-width: 500px;
-    min-width: 300px;
+    min-width: 100px;
     margin: 0 auto;
     padding-bottom: 2em;
   }
         .addf{
-            padding-left: 10%;
+            padding-left: 5%;
+            padding-right: 5%;
             background-color: rgba(109, 205, 243,0.8);
             box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-            margin: 16px;
             border-radius: 14px;
             width: 98%;
+            min-width: 200px;
+            margin-left: 10px;
         }
         .addf label{
             display: block;
@@ -31,14 +33,15 @@
         }
         input{
             margin: 10px 0 0 0;
-            /* width: 100%; */
             min-height: 2em;
             border-radius: 5px;
             border: none;
         }
         textarea{
+            display: block;
             border-radius: 5px;
-            /* width: 95%; */
+            width: 100%;
+            height: 600px;
         }
         input[type="submit"] {
     display: block;
@@ -48,7 +51,6 @@
     font-size: 1.1rem;
     font-weight: 400;
     background-color: #fff;
-    min-width: 300px;
     color: skyblue;
     border: none;
     border-radius: 20px;
@@ -57,9 +59,7 @@
     </style>
 </head>
 <body>
-    <div>
 
-    </div class="addp" style="text-align: center; width: 98%">
     <h3 style="text-align: center; margin: 25px;">Add your blog here..</h3>
     <div class="addf" style="text-align: center;">
         <form method="POST" action="save">
@@ -69,7 +69,7 @@
             <input type="text" name="title" required>
             <label for="body">Body</label>
             {{form.media}}
-            <textarea name="body" id="" cols="70" rows="40" required></textarea>
+            <textarea name="body" minlength="700" style="resize: both;" required></textarea>
             {% for message in messages %}
             <h5>{{message}}</h5>
             {% endfor %}
@@ -79,5 +79,6 @@
             <input type="submit">
         </form>
     </div>
+
 </body>
 </html>

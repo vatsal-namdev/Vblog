@@ -11,7 +11,7 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <style>
-        body{
+          body{
             background: white;
         }
         nav{
@@ -39,28 +39,30 @@
             border: 1px solid rgb(81, 171, 129);
             border-radius: 8px;
             /* height: 150px; */
-            width: 100%;
+            width: 98%;
             padding-left: 5px;
             padding-top: 3px;
             padding-right: 0;
             padding-bottom: 2px;
             background: rgb(252, 252, 252);
-            margin: 10px 0 10px 0;
+            margin: 10px 0 10px 10px;
+            align-self: center;
             transition: all;
         }
         .box:hover{
             transform: scale(1.004);
         }
-        .navbar-brand{
+        
+            .navbar-brand{
                 float: left;
                 color: black;
                 font-style: italic;
                 font-family: cursive;
-                border: 2px dashed white;
+                border: 1px dashed white;
                 border-radius: 16px;
+                margin-left: 3px;
+                size: 10px;
             }
-       
-            
             li a {
                     display: block;
                     color: rgb(79, 106, 169);
@@ -69,18 +71,29 @@
                     text-decoration: none;
                 }
                 
-                        .search-container input{
-                        
+                .search-container input{
+                        position: relative;
                         border: none;
                         border-radius: 8px;
                         cursor: pointer;
+                        height: 30px;
+                        width: 80%;
                         }
 
-                        .search-container button:hover {
-                        background: #ccc;
-                        border-radius: 6px;
+
+                        .search-container button{
+                            background: transparent;
+                            border: none;
+                            width: 30px;
+                            height: 30px;
+                            position: absolute;
+                            top: 10;
                         }
                        
+                        .search-container button:hover{
+                            background-color: white;
+                            border-radius: 25px;
+                        }
 
         li a:hover {
                     background-color: #111;
@@ -89,7 +102,7 @@
             .active {
                     color: white;
                     }
-            button{
+            .heading button{
                 background-color: transparent;
                 border: none;
                 padding: 15px 32px;
@@ -97,21 +110,17 @@
                 font-size: 16px;
                 color: white;
             }
-            button:hover{
+            .heading button:hover{
                 background-color: white;
                 color: black;
                 border-radius: 6px;
             }
-            footer{
-                background-color: #3b3a3a;
-                color: white;
-                text-align: center;
-                padding: 100px 0px 80px 0px;
-                border-radius: 5px;
-                
-            }
+           
             .bg{
                 background-color: #8fc9f1;
+            }
+            #btn{
+                background-color:#8fc9f1;
             }
     </style>
 </head>
@@ -139,14 +148,13 @@
                 <a href="#about" class="nav-link mx-3 text-white fs-5">About</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link mx-3 text-white fs-5">Contact Us</a>
+                <a href="#contact" class="nav-link mx-3 text-white fs-5">Contact Us</a>
             </li>
         </ul>
     </div>
 </nav>
     <div class="heading">
         <h1>..Blog Here..</h1>
-        <hr>
         {% if user.is_authenticated %}
         <a href="logout"><button>Logout</button></a>
         <a href="ad"><button>Add Blog</button></a>
@@ -172,7 +180,119 @@
     </div>
     {% endfor %}
     <footer>
-        Thanks for reading...
+        <div class="bg-light">
+            <section
+               class="d-flex justify-content-between p-4"
+               style="background-color: #b799ff"
+               >
+        <!-- Left -->
+        <div class="me-5">
+          <span>Get connected with us on social networks:</span>
+        </div>
+        <!-- Left -->
+  
+        <!-- Right -->
+        <div>
+          <a href="" class="text-black me-4">
+            <i class="bi bi-telephone-fill"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="bi bi-google"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </div>
+        <!-- Right -->
+      </section>
+      <!-- Section: Social media -->
+  
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <!-- Content -->
+              <h6 class="text-uppercase fw-bold">Vblog
+                </h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p id="about">
+                
+                On Vblog you can find best content and also can share your content.
+              </p>
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold">Features</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p>
+                <a href="#" class="text-black">Blogs</a>
+              </p>
+              
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold">Useful links</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p>
+                <a href="update_profile/{{user.username}}/{{user.pk}}" class="text-black">Your Account</a>
+              </p>
+              <p>
+                <a href="" class="text-black">About us</a>
+              </p>
+              
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold" id="contact">Contact</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p><i class="fas fa-home mr-3"></i>Vblog</p>
+              <p><i class="bi bi-envelope mr-3"></i> vatsalnam@gmail.com</p>
+              <!-- <p><i class="bi bi-phone mr-3"></i> 123456789</p> -->
+              <!-- <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p> -->
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+  
+      <!-- Copyright -->
+      <div
+           class="text-center p-3"
+           style="background-color: rgba(0, 0, 0, 0.2)"
+           >
+        © 2023 Copyright:
+      </div>
+      <!-- Copyright -->
+        </div>
     </footer>
 </body>
 </html>
