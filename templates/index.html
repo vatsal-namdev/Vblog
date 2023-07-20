@@ -35,23 +35,6 @@
             animation-duration: 4s;
         }
        
-        .box{
-            border: 1px solid rgb(81, 171, 129);
-            border-radius: 8px;
-            /* height: 150px; */
-            width: 98%;
-            padding-left: 5px;
-            padding-top: 3px;
-            padding-right: 0;
-            padding-bottom: 2px;
-            background: rgb(252, 252, 252);
-            margin: 10px 0 10px 10px;
-            align-self: center;
-            transition: all;
-        }
-        .box:hover{
-            transform: scale(1.004);
-        }
         
             .navbar-brand{
                 float: left;
@@ -175,16 +158,21 @@
         
     </div>
 
-    {% for p in post reversed%}
-    <div class="box">
-       <a style="text-decoration: none; color: black;" href="/post/{{p.id}}">
-        <h2>{{p.title|truncatewords:10}}</h2>
-        <h5>{{p.created}}</h5>
-        <p>{{p.body|truncatewords:20|safe}}</p>
-       </a>
+    
+    <div class="container-fluid">
+      <div class="row">
+          {% for p in post reversed%}
+          <div class="col-12 m-2 bg-white shadow">
+              <a style="text-decoration: none; color: black;" href="/post/{{p.slug}}">
+                  <h2>{{p.title|truncatewords:10}}</h2>
+                  <h6>{{p.created}}</h6>
+                  <p>{{p.body|truncatewords:20|safe}}</p>
+                 </a>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
 
-    </div>
-    {% endfor %}
     <footer>
         <div class="bg-light">
             <section

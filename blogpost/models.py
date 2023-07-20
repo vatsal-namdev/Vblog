@@ -10,10 +10,16 @@ class posts(models.Model):
     body = RichTextField(blank=True,null=True,max_length=100000)
     author = models.CharField(max_length=1000,blank=True)
     created = models.DateTimeField(default=datetime.now, blank=True)
+    slug = models.SlugField()
     likes = models.ManyToManyField(User, related_name='blog_posts')
 
     def total_likes(self):
         return self.likes.count()
 
+    def __str__(self):
+        return self.title
+
     def get_absolute_url(self):
-        return reverse('post', args=(str(self.pk)))
+        return reverse("core:post", kwargs={
+            'slug':self.slug
+        })

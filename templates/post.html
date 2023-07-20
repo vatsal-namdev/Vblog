@@ -39,19 +39,19 @@
         <p>{{post.body|safe}}</p>
         <h6>-{{post.author}}</h6>
         {% if signal %}
-        <a href="update/{{post.id}}">Edit</a>
-        <a href="{% url 'delete_post' post.pk %}">Delete</a>
+        <a href="update/{{post.slug}}">Edit</a>
+        <a href="{% url 'delete_post' post.slug %}">Delete</a>
         {% endif %}
 
         <br>
         <br>
-        <form action="{% url 'like' post.pk %}" method="POST">
+        <form action="{% url 'like' post.slug %}" method="POST">
             {% csrf_token %}
            {% if user.is_authenticated %}
            {% if liked %}
-           <button type="submit", name="post_id", value="{{post.id}}", class="btn btn-primary btn-sm">UnLike</button>
+           <button type="submit", name="post_id", value="{{post.slug}}", class="btn btn-primary btn-sm">UnLike</button>
            {% else %}
-           <button type="submit", name="post_id", value="{{post.id}}", class="btn btn-danger btn-sm">Like</button>
+           <button type="submit", name="post_id", value="{{post.slug}}", class="btn btn-danger btn-sm">Like</button>
            
            {% endif %}
 

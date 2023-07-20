@@ -71,8 +71,11 @@ def save(request):
         author = request.POST.get('author')
         created = request.POST.get('created')
 
+        slug = title
+        slug = slug.replace(' ','-')
+
     
-        sv = posts(author=author,title=title,body=body,created=created)
+        sv = posts(author=author,title=title,body=body,created=created,slug=slug)
         sv.save()
         return HttpResponse("Submitted")
 
@@ -102,8 +105,8 @@ class UpdateProfileView(UpdateView):
     fields = ['username','email']
     success_url = reverse_lazy('index')
 
-def LikeView(request, pk):
-    p = get_object_or_404(posts, id=request.POST.get('post_id'))
+def LikeView(request, slug):
+    p = get_object_or_404(posts, slug=request.POST.get('post_id'))
     
     liked = False
     if p.likes.filter(id=request.user.id).exists():
@@ -112,20 +115,22 @@ def LikeView(request, pk):
     else:
         p.likes.add(request.user)
         liked =True
-    return HttpResponseRedirect(reverse('post', args=[str(pk)]))
+    return HttpResponseRedirect(reverse('post', kwargs={
+            'slug':slug
+        }))
 
 def logout(request):
     auth.logout(request)
     return redirect('/')
 
-def post(request, pk):
-    post = posts.objects.get(id=pk)
+def post(request, slug):
+    post = posts.objects.get(slug=slug)
     username = request.user.username
     if username == post.author:
         signal = True
     else:
         signal = False
-    stuff = get_object_or_404(posts, id= pk)
+    stuff = get_object_or_404(posts, slug = slug)
     likes_count = stuff.total_likes()
 
     liked = False
