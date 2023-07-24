@@ -124,6 +124,9 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
+def about(request):
+    return render(request, 'about.html')
+
 def post(request, slug):
     post = posts.objects.get(slug=slug)
     username = request.user.username

@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vblog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <style>
         body{
             background: #f1f1f1;
@@ -27,21 +30,108 @@
             /* margin: 10px 10px 10px 6px;
             margin-right: 20px; */
         }
+        .navbar-brand{
+                float: left;
+                color: black;
+                font-style: italic;
+                font-family: cursive;
+                border: 1px dashed white;
+                border-radius: 16px;
+                margin-left: 3px;
+                size: 10px;
+            }
+            li a {
+                    display: block;
+                    color: rgb(79, 106, 169);
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
+                
+                .search-container input{
+                        position: relative;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        height: 30px;
+                        width: 80%;
+                        }
+
+
+                        .search-container button{
+                            background: transparent;
+                            border: none;
+                            width: 30px;
+                            height: 30px;
+                            position: absolute;
+                            top: 10;
+                        }
+                       
+                        .search-container button:hover{
+                            background-color: white;
+                            border-radius: 25px;
+                        }
+
+        li a:hover {
+                    background-color: #111;
+                    color: white;
+                    }
+            .active {
+                    color: white;
+                    }
+                    .bg{
+                background-color: #8fc9f1;
+            }
+            #btn{
+                background-color:#8fc9f1;
+            }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-md bg mb-2">
+        <a href="" class="navbar-brand">V-Blog</a>
+        <div class="search-container ">
+            <form method="GET" action="search">
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="bi bi-search"></i></button>
+          </form>
+        </div>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#btn" style="position: relative; right: 0;">
+        <i class="bi bi-list"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="btn">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a href="/" class="nav-link mx-3 text-white fs-5">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a href="update_profile/{{user.username}}/{{user.pk}}" class="nav-link mx-3 text-white fs-5">Edit Profile</a></li>
+            {% endif %}
+            <li class="nav-item">
+                <a href="about" class="nav-link mx-3 text-white fs-5">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact" class="nav-link mx-3 text-white fs-5">Contact Us</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
     <div class="heading"><h1>Blog Here</h1></div>
 
     
-    <div class="box" style="text-align: center;">
-        <h2>{{post.title}}</h2>
+    <div class="box m-1" style="text-align: center;">
+        <h2>"{{post.title}}"</h2>
         <h5>{{post.created}}</h5>
-        <img src="{{post.post_img.url}}" alt="" width="30%" height="30%">
+        <img src="{{post.post_img.url}}" alt="" width="25%" height="25%">
+        <hr>
         <p>{{post.body|safe}}</p>
         <h6>-{{post.author}}</h6>
         {% if signal %}
         <a href="update/{{post.slug}}">Edit</a>
         <a href="{% url 'delete_post' post.slug %}">Delete</a>
+        <p style="color: skyblue;">To make your post more attractive, edit it...</p>
         {% endif %}
 
         <br>
@@ -50,9 +140,9 @@
             {% csrf_token %}
            {% if user.is_authenticated %}
            {% if liked %}
-           <button type="submit", name="post_id", value="{{post.slug}}", class="btn btn-primary btn-sm">UnLike</button>
+           <button type="submit", name="post_id", value="{{post.slug}}", class="btn btn-danger btn-sm">UnLike</button>
            {% else %}
-           <button type="submit", name="post_id", value="{{post.slug}}", class="btn btn-danger btn-sm">Like</button>
+           <button type="submit", name="post_id", value="{{post.slug}}", class="btn btn-primary btn-sm">Like</button>
            
            {% endif %}
 
@@ -61,6 +151,7 @@
            {% endif %}
            -{{likes_count}} Likes
         </form>
+        
     </div>
    
 </body>
