@@ -9,6 +9,7 @@ class posts(models.Model):
     title = models.CharField(max_length=100)
     body = RichTextField(blank=True,null=True,max_length=100000)
     author = models.CharField(max_length=1000,blank=True)
+    post_img = models.ImageField(upload_to='post_images',null=True)
     created = models.DateTimeField(default=datetime.now, blank=True)
     slug = models.SlugField()
     likes = models.ManyToManyField(User, related_name='blog_posts')
@@ -20,6 +21,6 @@ class posts(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("core:post", kwargs={
+        return reverse("post", kwargs={
             'slug':self.slug
         })

@@ -162,12 +162,21 @@
     <div class="container-fluid">
       <div class="row">
           {% for p in post reversed%}
-          <div class="col-12 m-2 bg-white shadow">
+          <div class="col-12 m-2 p-1 bg-white shadow">
               <a style="text-decoration: none; color: black;" href="/post/{{p.slug}}">
-                  <h2>{{p.title|truncatewords:10}}</h2>
-                  <h6>{{p.created}}</h6>
-                  <p>{{p.body|truncatewords:20|safe}}</p>
-                 </a>
+                <div class="row">
+                  <div class="col-3 col-md-2" style="left: 0; position: relative;">
+                    <img src="{{p.post_img.url}}" alt="" width= "90%" height =
+                    "100%"/>
+                  </div>
+                   <div class="col-8 col-md-9">
+                    <h2>{{p.title|truncatewords:10}}</h2>
+                    <h6>{{p.created}}</h6>
+                    <p>{{p.body|truncatewords:20|safe}}</p>
+                   
+                   </div>
+                </div>
+              </a>
           </div>
           {% endfor %}
       </div>

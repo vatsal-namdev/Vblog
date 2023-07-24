@@ -36,6 +36,7 @@
     <div class="box" style="text-align: center;">
         <h2>{{post.title}}</h2>
         <h5>{{post.created}}</h5>
+        <img src="{{post.post_img.url}}" alt="" width="30%" height="30%">
         <p>{{post.body|safe}}</p>
         <h6>-{{post.author}}</h6>
         {% if signal %}

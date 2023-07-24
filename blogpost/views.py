@@ -68,6 +68,7 @@ def save(request):
     if request.method=='POST':
         title = request.POST.get('title')
         body = request.POST.get('body')
+        post_img = request.FILES.get('image_upload')
         author = request.POST.get('author')
         created = request.POST.get('created')
 
@@ -75,9 +76,9 @@ def save(request):
         slug = slug.replace(' ','-')
 
     
-        sv = posts(author=author,title=title,body=body,created=created,slug=slug)
+        sv = posts(author=author,title=title,body=body,post_img=post_img,created=created,slug=slug)
         sv.save()
-        return HttpResponse("Submitted")
+        return redirect('/')
 
 def search(request):
     query = request.GET['search']

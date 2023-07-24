@@ -62,7 +62,7 @@
 
     <h3 style="text-align: center; margin: 25px;">Add your blog here..</h3>
     <div class="addf" style="text-align: center;">
-        <form method="POST" action="save">
+        <form method="POST" action="save" enctype="multipart/form-data">
             {% csrf_token %}
             {{form.media}}
             <label for="title">Title</label>
@@ -70,6 +70,8 @@
             <label for="body">Body</label>
             {{form.media}}
             <textarea name="body" minlength="700" style="resize: both;" required></textarea>
+            <label for="image">Upload Image</label>
+            <input type="file" name="image_upload" id="image">
             {% for message in messages %}
             <h5>{{message}}</h5>
             {% endfor %}
