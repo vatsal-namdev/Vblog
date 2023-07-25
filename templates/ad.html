@@ -71,7 +71,7 @@
             {{form.media}}
             <textarea name="body" minlength="70" style="resize: both;" required></textarea>
             <label for="image">Upload Image</label>
-            <input type="file" name="image_upload" id="image">
+            <input type="file" name="image_upload" required id="image">
             {% for message in messages %}
             <h5>{{message}}</h5>
             {% endfor %}
